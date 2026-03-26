@@ -42,6 +42,10 @@ data_clean <- data_clean |>
 names(data_clean) <- gsub("\\.\\.", "_pct", names(data_clean))
 names(data_clean) <- gsub("\\.", "_", names(data_clean))
 
+# 2.4.1 Replace NAs in all numeric columns with 0
+data_clean <- data_clean |>
+  mutate(across(where(is.numeric), ~ replace_na(.x, 0)))
+
 cat("\n  CLEANED COLUMN NAMES  \n")
 print(names(data_clean))
 
